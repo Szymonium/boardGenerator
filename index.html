@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Board generator</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      background-color: #1b1b1b;
+      text-align: center;
+    }
+
+    main {
+      margin: auto;
+      margin-top: 25px;
+      width: fit-content;
+    }
+
+    a {
+      color: white;
+    }
+  </style>
+  <script src="./p5.min.js"></script>
+  <script src="./tile.js"></script>
+  <script src="./cell.js"></script>
+  <script src="./main.js"></script>
+  <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var element = $("#image");
+
+      $("#download").on('click', function(){
+
+        html2canvas(element, {
+          onrendered: function(canvas) {
+            var imageData = canvas.toDataURL("image/jpg");
+            var newData = imageData.replace(/^data:image\/jpg/, "data:application/octet-stream");
+            $("#download").attr("download", "board.jpg").attr("href", newData);
+          }
+        });
+
+      });
+    });
+  </script>
+</head>
+<body>
+  <a id="download">Download image</a>
+  <main id="image">
+  </main>
+</body>
+</html>
